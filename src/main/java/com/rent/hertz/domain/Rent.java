@@ -1,4 +1,4 @@
-package com.rent.hertz.domains;
+package com.rent.hertz.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @EqualsAndHashCode
 @Accessors(chain=true)
-public class Customer {
+public class Rent {
 
     @Getter
     @Setter

@@ -1,4 +1,4 @@
-package com.rent.hertz.domains;
+package com.rent.hertz.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @EqualsAndHashCode
 @Accessors(chain=true)
-public class category implements Serializable {
+public class Category implements Serializable {
 
     @Getter
     @Setter
@@ -23,6 +23,6 @@ public class category implements Serializable {
     @Getter
     @Setter
     @Column(name = "price")
-    private String price;
+    private Double price;
 
 }

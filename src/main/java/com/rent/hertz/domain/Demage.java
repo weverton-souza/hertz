@@ -1,4 +1,4 @@
-package com.rent.hertz.domains;
+package com.rent.hertz.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
