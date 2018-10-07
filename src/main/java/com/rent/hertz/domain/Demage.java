@@ -15,6 +15,9 @@ public class Demage {
 
     private Double price;
 
+    @ManyToOne
+    private Rent rent;
+
     public long getId() {
         return id;
     }
@@ -42,6 +45,15 @@ public class Demage {
         return this;
     }
 
+    public Rent getRent() {
+        return rent;
+    }
+
+    public Demage setRent(Rent rent) {
+        this.rent = rent;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,4 +75,5 @@ public class Demage {
             ", price=" + price +
             '}';
     }
+
 }

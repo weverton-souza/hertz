@@ -17,6 +17,9 @@ public class Vehicle {
     @ManyToOne
     private Model model;
 
+    @ManyToOne
+    private Category category;
+
 
     public long getId() {
         return id;
@@ -45,6 +48,14 @@ public class Vehicle {
         return this;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public Vehicle setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -67,4 +78,5 @@ public class Vehicle {
             ", model=" + model +
             '}';
     }
+
 }

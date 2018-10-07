@@ -14,6 +14,15 @@ public class Rent {
 
     private Date date;
 
+    @ManyToOne
+    private Vehicle vehicle;
+
+    @ManyToOne
+    private Customer customer;
+
+    @ManyToOne
+    private Demage demage;
+
 
     public long getId() {
         return id;
@@ -30,6 +39,33 @@ public class Rent {
 
     public Rent setDate(Date date) {
         this.date = date;
+        return this;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public Rent setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+        return this;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Rent setCustomer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public Demage getDemage() {
+        return demage;
+    }
+
+    public Rent setDemage(Demage demage) {
+        this.demage = demage;
         return this;
     }
 
@@ -53,4 +89,5 @@ public class Rent {
             ", date=" + date +
             '}';
     }
+
 }

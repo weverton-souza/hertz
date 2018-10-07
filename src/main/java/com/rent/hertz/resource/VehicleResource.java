@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/veihcle")
+@RequestMapping("/vehicle")
 public class VehicleResource {
 
     @Autowired
