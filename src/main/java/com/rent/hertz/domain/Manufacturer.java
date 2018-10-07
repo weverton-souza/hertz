@@ -1,10 +1,11 @@
 package com.rent.hertz.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Customer {
+public class Manufacturer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,14 +14,14 @@ public class Customer {
 
     private String name;
 
-    private String document;
+    private String description;
 
 
     public long getId() {
         return id;
     }
 
-    public Customer setId(long id) {
+    public Manufacturer setId(long id) {
         this.id = id;
         return this;
     }
@@ -29,17 +30,17 @@ public class Customer {
         return name;
     }
 
-    public Customer setName(String name) {
+    public Manufacturer setName(String name) {
         this.name = name;
         return this;
     }
 
-    public String getDocument() {
-        return document;
+    public String getDescription() {
+        return description;
     }
 
-    public Customer setDocument(String document) {
-        this.document = document;
+    public Manufacturer setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -47,8 +48,8 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return id == customer.id;
+        Manufacturer that = (Manufacturer) o;
+        return id == that.id;
     }
 
     @Override
@@ -58,10 +59,10 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Make{" +
             "id=" + id +
             ", name='" + name + '\'' +
-            ", document='" + document + '\'' +
+            ", description='" + description + '\'' +
             '}';
     }
 }

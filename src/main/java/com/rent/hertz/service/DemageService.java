@@ -24,7 +24,7 @@ public class DemageService {
         return demageRepository.findById(idDemage);
     }
 
-    public List<Demage> findById(final Iterable<Long> idsDemages){
+    public List<Demage> findAllById(final List<Long> idsDemages){
         return demageRepository.findAllById(idsDemages);
     }
 
@@ -32,11 +32,11 @@ public class DemageService {
         return demageRepository.findAll(pageable);
     }
 
-    public void deleteById(final Long idCategory){
-        demageRepository.deleteById(idCategory);
+    public void deleteById(final Long idDemage){
+        demageRepository.deleteById(idDemage);
     }
 
-    public void deleteById(final Iterable<Demage> demages){
+    public void deleteAllById(final List<Demage> demages){
         demageRepository.deleteAll(demages);
     }
 }

@@ -24,7 +24,7 @@ public class CustomerService {
         return customerRepository.findById(idCustomer);
     }
 
-    public List<Customer> findById(final Iterable<Long> idsCustomers){
+    public List<Customer> findAllById(final List<Long> idsCustomers){
         return customerRepository.findAllById(idsCustomers);
     }
 
@@ -36,7 +36,7 @@ public class CustomerService {
         customerRepository.deleteById(idCategory);
     }
 
-    public void deleteById(final Iterable<Customer> customers){
+    public void deleteAllById(final List<Customer> customers){
         customerRepository.deleteAll(customers);
     }
 

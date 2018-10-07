@@ -36,7 +36,7 @@ public class CategoryService {
         categoryRepository.deleteById(idCategory);
     }
 
-    public void deleteById(final Iterable<Category> categories){
+    public void deleteAllById(final Iterable<Category> categories){
         categoryRepository.deleteAll(categories);
     }
 

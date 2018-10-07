@@ -1,10 +1,11 @@
 package com.rent.hertz.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Customer {
+public class Model implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,14 +14,16 @@ public class Customer {
 
     private String name;
 
-    private String document;
+    private String modelYear;
+
+    private String description;
 
 
     public long getId() {
         return id;
     }
 
-    public Customer setId(long id) {
+    public Model setId(long id) {
         this.id = id;
         return this;
     }
@@ -29,17 +32,26 @@ public class Customer {
         return name;
     }
 
-    public Customer setName(String name) {
+    public Model setName(String name) {
         this.name = name;
         return this;
     }
 
-    public String getDocument() {
-        return document;
+    public String getModelYear() {
+        return modelYear;
     }
 
-    public Customer setDocument(String document) {
-        this.document = document;
+    public Model setModelYear(String modelYear) {
+        this.modelYear = modelYear;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Model setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -47,8 +59,8 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return id == customer.id;
+        Model model = (Model) o;
+        return id == model.id;
     }
 
     @Override
@@ -58,10 +70,11 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Model{" +
             "id=" + id +
             ", name='" + name + '\'' +
-            ", document='" + document + '\'' +
+            ", modelYear='" + modelYear + '\'' +
+            ", description='" + description + '\'' +
             '}';
     }
 }
