@@ -27,6 +27,7 @@ public class Rent {
     @OneToMany
     private List<TrafficTicket> trafficTickets;
 
+
     public long getId() {
         return id;
     }
@@ -63,27 +64,6 @@ public class Rent {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rent rent = (Rent) o;
-        return id == rent.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Rent{" +
-            "id=" + id +
-            ", date=" + date +
-            '}';
-    }
-
     public List<Demage> getDemages() {
         return demages;
     }
@@ -100,5 +80,30 @@ public class Rent {
     public Rent setTrafficTickets(List<TrafficTicket> trafficTickets) {
         this.trafficTickets = trafficTickets;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rent rent = (Rent) o;
+        return id == rent.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Rent{" +
+                "id=" + id +
+                ", date=" + date +
+                ", vehicle=" + vehicle +
+                ", customer=" + customer +
+                ", demages=" + demages +
+                ", trafficTickets=" + trafficTickets +
+                '}';
     }
 }
