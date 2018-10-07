@@ -23,7 +23,7 @@ public class DemageResource {
         return demageService.save(demage);
     }
 
-    @RequestMapping(value="{idCategory}/update", method = RequestMethod.PUT)
+    @RequestMapping(value="{idDemage}/update", method = RequestMethod.PUT)
     public Demage update(@PathVariable final Long idDemage, @RequestBody final Demage demage) {
         return demageService.save(demage.setId(idDemage));
     }
@@ -38,14 +38,14 @@ public class DemageResource {
         return demageService.findById(idDemage);
     }
 
-    @RequestMapping(value="/find-all", method = RequestMethod.GET)
-    public List<Demage> findAllById(@PathVariable final List<Long> idsDemages){
-        return demageService.findAllById(idsDemages);
+    @RequestMapping(value="/{idsDemage}/find-all", method = RequestMethod.GET)
+    public List<Demage> findAllById(@PathVariable final List<Long> idsDemage){
+        return demageService.findAllById(idsDemage);
     }
 
     @RequestMapping(value="/{idDemage}/delete", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable final Long idCustomer) {
-        demageService.deleteById(idCustomer);
+    public void deleteById(@PathVariable final Long idDemage) {
+        demageService.deleteById(idDemage);
     }
 
     @RequestMapping(value="/delete-all", method = RequestMethod.DELETE)
