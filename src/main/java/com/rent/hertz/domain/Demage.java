@@ -15,9 +15,6 @@ public class Demage {
 
     private Double price;
 
-    @ManyToOne
-    private Rent rent;
-
     public long getId() {
         return id;
     }
@@ -42,15 +39,6 @@ public class Demage {
 
     public Demage setPrice(Double price) {
         this.price = price;
-        return this;
-    }
-
-    public Rent getRent() {
-        return rent;
-    }
-
-    public Demage setRent(Rent rent) {
-        this.rent = rent;
         return this;
     }
 

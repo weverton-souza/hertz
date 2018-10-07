@@ -1,6 +1,5 @@
 package com.rent.hertz.resource;
 
-import com.rent.hertz.domain.TrafficTicket;
 import com.rent.hertz.domain.Vehicle;
 import com.rent.hertz.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;

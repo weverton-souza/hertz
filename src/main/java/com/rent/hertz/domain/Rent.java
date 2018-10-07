@@ -2,6 +2,7 @@ package com.rent.hertz.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,9 +21,11 @@ public class Rent {
     @ManyToOne
     private Customer customer;
 
-    @ManyToOne
-    private Demage demage;
+    @OneToMany
+    private List<Demage> demages;
 
+    @OneToMany
+    private List<TrafficTicket> trafficTickets;
 
     public long getId() {
         return id;
@@ -60,15 +63,6 @@ public class Rent {
         return this;
     }
 
-    public Demage getDemage() {
-        return demage;
-    }
-
-    public Rent setDemage(Demage demage) {
-        this.demage = demage;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,4 +84,21 @@ public class Rent {
             '}';
     }
 
+    public List<Demage> getDemages() {
+        return demages;
+    }
+
+    public Rent setDemages(List<Demage> demages) {
+        this.demages = demages;
+        return this;
+    }
+
+    public List<TrafficTicket> getTrafficTickets() {
+        return trafficTickets;
+    }
+
+    public Rent setTrafficTickets(List<TrafficTicket> trafficTickets) {
+        this.trafficTickets = trafficTickets;
+        return this;
+    }
 }
