@@ -43,7 +43,7 @@ public class CategoryResource {
         return categoryService.findById(idsCategories);
     }
 
-    @RequestMapping(value="/{id-category}/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value="/{idCategory}/delete", method = RequestMethod.DELETE)
     public void deleteById(final Long idCategory){
         categoryService.deleteById(idCategory);
     }

@@ -26,7 +26,7 @@ public class CustomerResource {
 
     @RequestMapping(value="{idCategory}/update", method = RequestMethod.PUT)
     public Customer update(@PathVariable final Long idCategory, @RequestBody final Customer customer) {
-        return customerService.save(customer);
+        return customerService.save(customer.setId(idCategory));
     }
 
     @RequestMapping(value="/list-all", method = RequestMethod.GET)
@@ -34,7 +34,7 @@ public class CustomerResource {
         return  customerService.findAll(pageable);
     }
 
-    @RequestMapping(value="/{id-category}/find", method = RequestMethod.GET)
+    @RequestMapping(value="/{idCustomer}/find", method = RequestMethod.GET)
     public Optional<Customer> findById(@PathVariable final Long idCustomer) {
         return customerService.findById(idCustomer);
     }
@@ -44,7 +44,7 @@ public class CustomerResource {
         return customerService.findAllById(idsCustomers);
     }
 
-    @RequestMapping(value="/{id-category}/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value="/{idCustomer}/delete", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable final Long idCustomer) {
         customerService.deleteById(idCustomer);
     }
