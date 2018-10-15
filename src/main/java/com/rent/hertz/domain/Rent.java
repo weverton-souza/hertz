@@ -13,7 +13,7 @@ public class Rent {
     @Column(name = "id")
     private long id;
 
-    private Date date;
+    private String date;
 
     @ManyToOne
     private Vehicle vehicle;
@@ -37,11 +37,11 @@ public class Rent {
         return this;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Rent setDate(Date date) {
+    public Rent setDate(String date) {
         this.date = date;
         return this;
     }

@@ -53,4 +53,9 @@ public class VehicleResource {
         vehicleService.deleteAllById(vehicles);
     }
 
+    @RequestMapping(value="/find-vehicle-by-category/{idCategoria}", method = RequestMethod.GET)
+    public Page<Vehicle> findVehicleByCategory(@PathVariable final String idCategoria, final Pageable pageable) {
+        return vehicleService.findVehicleByCategory(idCategoria, pageable);
+    }
+
 }

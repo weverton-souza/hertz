@@ -39,4 +39,8 @@ public class VehicleService {
     public void deleteAllById(final List<Vehicle> vehicles){
         vehicleRepository.deleteAll(vehicles);
     }
+
+    public Page<Vehicle> findVehicleByCategory(final String idCategoria, final Pageable pageable){
+        return vehicleRepository.findVehicleByCategory(idCategoria, pageable);
+    }
 }
