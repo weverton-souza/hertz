@@ -1,11 +1,9 @@
 package com.rent.hertz.resource;
 
-import com.rent.hertz.domain.Category;
 import com.rent.hertz.domain.Customer;
+import com.rent.hertz.resource.interfaces.HertzResource;
 import com.rent.hertz.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,45 +11,39 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/customer")
-public class CustomerResource {
+@RequestMapping("/customers")
+public class CustomerResource implements HertzResource<Customer> {
 
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public Customer save(@RequestBody final Customer customer) {
+    @Override @RequestMapping(method = RequestMethod.POST)
+    public Customer save(@RequestBody final Customer customer){
         return customerService.save(customer);
     }
 
-    @RequestMapping(value="{idCategory}/update", method = RequestMethod.PUT)
-    public Customer update(@PathVariable final Long idCategory, @RequestBody final Customer customer) {
-        return customerService.save(customer.setId(idCategory));
+    @Override @RequestMapping(method = RequestMethod.PUT)
+    public Customer update(@RequestBody final Customer customer){
+        return customerService.save(customer);
     }
 
-    @RequestMapping(value="/list-all", method = RequestMethod.GET)
-    public Page<Customer> findAll(final Pageable pageable) {
-        return  customerService.findAll(pageable);
+    @Override @RequestMapping(method = RequestMethod.GET)
+    public List<Customer> findAll(){
+        return  customerService.findAll();
     }
 
-    @RequestMapping(value="/{idCustomer}/find", method = RequestMethod.GET)
-    public Optional<Customer> findById(@PathVariable final Long idCustomer) {
+    @Override @RequestMapping(value="/{idCustomer}", method = RequestMethod.GET)
+    public Optional<Customer> findById(@PathVariable final String idCustomer){
         return customerService.findById(idCustomer);
     }
 
-    @RequestMapping(value="/{idsCustomers}/find-all", method = RequestMethod.GET)
-    public List<Customer> findAllById(@PathVariable final List<Long> idsCustomers){
-        return customerService.findAllById(idsCustomers);
+    @Override @RequestMapping(value="/{idCustomer}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable final String idCustomer){
+        customerService.findById(idCustomer)
+                .ifPresent(this::accept);
     }
 
-    @RequestMapping(value="/{idCustomer}/delete", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable final Long idCustomer) {
-        customerService.deleteById(idCustomer);
+    private void accept(Customer customer) {
+        customerService.delete(customer);
     }
-
-    @RequestMapping(value="/delete-all", method = RequestMethod.DELETE)
-    public void deleteById(@RequestBody final List<Customer> customers) {
-        customerService.deleteAllById(customers);
-    }
-
 }

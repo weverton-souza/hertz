@@ -1,10 +1,9 @@
 package com.rent.hertz.resource;
 
 import com.rent.hertz.domain.Vehicle;
+import com.rent.hertz.resource.interfaces.HertzResource;
 import com.rent.hertz.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,50 +11,40 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/vehicle")
-public class VehicleResource {
+@RequestMapping("/vehicles")
+public class VehicleResource implements HertzResource<Vehicle> {
 
     @Autowired
     private VehicleService vehicleService;
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public Vehicle save(@RequestBody final Vehicle vehicle) {
+    @Override @RequestMapping(method = RequestMethod.POST)
+    public Vehicle save(@RequestBody final Vehicle vehicle){
         return vehicleService.save(vehicle);
     }
 
-    @RequestMapping(value="/{idVehicle}/update", method = RequestMethod.PUT)
-    public Vehicle update(@PathVariable final Long idVehicle, @RequestBody final Vehicle vehicle) {
-        return vehicleService.save(vehicle.setId(idVehicle));
+    @Override @RequestMapping(method = RequestMethod.PUT)
+    public Vehicle update(@RequestBody final Vehicle vehicle){
+        return vehicleService.save(vehicle);
     }
 
-    @RequestMapping(value="/list-all", method = RequestMethod.GET)
-    public Page<Vehicle> findAll(final Pageable pageable) {
-        return  vehicleService.findAll(pageable);
+    @Override @RequestMapping(method = RequestMethod.GET)
+    public List<Vehicle> findAll(){
+        return  vehicleService.findAll();
     }
 
-    @RequestMapping(value="/{idVehicle}/find", method = RequestMethod.GET)
-    public Optional<Vehicle> findById(@PathVariable final Long idVehicle) {
+    @Override @RequestMapping(value="/{idVehicle}", method = RequestMethod.GET)
+    public Optional<Vehicle> findById(@PathVariable final String idVehicle){
         return vehicleService.findById(idVehicle);
     }
 
-    @RequestMapping(value="/{idsVehicle}/find-all", method = RequestMethod.GET)
-    public List<Vehicle> findAllById(@PathVariable final List<Long> idsVehicle){
-        return vehicleService.findAllById(idsVehicle);
+    @Override @RequestMapping(value="/{idVehicle}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable final String idVehicle){
+        vehicleService.findById(idVehicle)
+                .ifPresent(this::accept);
     }
 
-    @RequestMapping(value="/{idVehicle}/delete", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable final Long idVehicle) {
-        vehicleService.deleteById(idVehicle);
-    }
-
-    @RequestMapping(value="/delete-all", method = RequestMethod.DELETE)
-    public void deleteById(@RequestBody final List<Vehicle> vehicles) {
-        vehicleService.deleteAllById(vehicles);
-    }
-
-    @RequestMapping(value="/find-vehicle-by-category/{idCategoria}", method = RequestMethod.GET)
-    public Page<Vehicle> findVehicleByCategory(@PathVariable final String idCategoria, final Pageable pageable) {
-        return vehicleService.findVehicleByCategory(idCategoria, pageable);
+    private void accept(Vehicle vehicle) {
+        vehicleService.delete(vehicle);
     }
 
 }

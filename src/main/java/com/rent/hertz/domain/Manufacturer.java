@@ -1,5 +1,7 @@
 package com.rent.hertz.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,20 +10,19 @@ import java.util.Objects;
 public class Manufacturer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     private String name;
 
     private String description;
 
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Manufacturer setId(long id) {
+    public Manufacturer setId(String id) {
         this.id = id;
         return this;
     }
@@ -49,7 +50,7 @@ public class Manufacturer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return id == that.id;
+        return id.equals(that.id);
     }
 
     @Override

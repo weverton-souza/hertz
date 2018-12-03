@@ -1,7 +1,9 @@
 package com.rent.hertz.service;
 
+import com.rent.hertz.domain.Employee;
 import com.rent.hertz.domain.Manufacturer;
 import com.rent.hertz.repository.ManufacturerRepository;
+import com.rent.hertz.service.interfaces.HertzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,32 +13,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ManufacturersService {
+public class ManufacturersService implements HertzService<Manufacturer> {
 
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
-    public Manufacturer save(final Manufacturer manufacturer){
-        return manufacturerRepository.save(manufacturer);
-    }
+	@Override
+	public Manufacturer save(final Manufacturer manufacturer){
+		return manufacturerRepository.save(manufacturer);
+	}
 
-    public Optional<Manufacturer> findById(final Long idManufacturer){
-        return manufacturerRepository.findById(idManufacturer);
-    }
+	@Override
+	public Manufacturer update(final Manufacturer manufacturer){
+		return manufacturerRepository.save(manufacturer);
+	}
 
-    public List<Manufacturer> findAllById(final Iterable<Long> idsManufacturers){
-        return manufacturerRepository.findAllById(idsManufacturers);
-    }
+	@Override
+	public Optional<Manufacturer> findById(final String idManufacturer){
+		return manufacturerRepository.findById(idManufacturer);
+	}
 
-    public Page<Manufacturer> findAll(final Pageable pageable){
-        return manufacturerRepository.findAll(pageable);
-    }
+	@Override
+	public List<Manufacturer> findAll(){
+		return manufacturerRepository.findAll();
+	}
 
-    public void deleteById(final Long idManufacturer){
-        manufacturerRepository.deleteById(idManufacturer);
-    }
-
-    public void deleteAllById(final Iterable<Manufacturer> manufacturers){
-        manufacturerRepository.deleteAll(manufacturers);
-    }
+	@Override
+	public void delete(final Manufacturer manufacturer){
+		manufacturerRepository.delete(manufacturer);
+	}
 }

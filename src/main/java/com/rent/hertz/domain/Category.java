@@ -1,6 +1,10 @@
 package com.rent.hertz.domain;
 
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,18 +12,21 @@ import java.util.Objects;
 public class Category implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
+
+    private String name;
 
     private String description;
 
     private Double price;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Category setId(long id) {
+    public Category setId(String id) {
         this.id = id;
         return this;
     }
@@ -42,6 +49,15 @@ public class Category implements Serializable {
         return this;
     }
 
+	public String getName() {
+		return name;
+	}
+
+	public Category setName(String name) {
+		this.name = name;
+		return this;
+	}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,6 +75,7 @@ public class Category implements Serializable {
     public String toString() {
         return "Category{" +
                 "id=" + getId() +
+		        ", name=" + getName() +
                 ", price=" + getPrice() +
                 '}';
     }

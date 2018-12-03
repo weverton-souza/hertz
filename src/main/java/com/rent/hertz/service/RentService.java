@@ -2,41 +2,41 @@ package com.rent.hertz.service;
 
 import com.rent.hertz.domain.Rent;
 import com.rent.hertz.repository.RentRepository;
+import com.rent.hertz.service.interfaces.HertzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RentService {
+public class RentService implements HertzService<Rent> {
 
     @Autowired
     private RentRepository rentRepository;
 
+    @Override
     public Rent save(final Rent rent){
         return rentRepository.save(rent);
     }
 
-    public Optional<Rent> findById(final Long idRent){
+    @Override
+    public Rent update(final Rent rent){
+        return rentRepository.save(rent);
+    }
+
+    @Override
+    public Optional<Rent> findById(final String idRent){
         return rentRepository.findById(idRent);
     }
 
-    public List<Rent> findAllById(final List<Long> idsRents){
-        return rentRepository.findAllById(idsRents);
+    @Override
+    public List<Rent> findAll(){
+        return rentRepository.findAll();
     }
 
-    public Page<Rent> findAll(final Pageable pageable){
-        return rentRepository.findAll(pageable);
-    }
-
-    public void deleteById(final Long idCategory){
-        rentRepository.deleteById(idCategory);
-    }
-
-    public void deleteAllById(final List<Rent> rents){
-        rentRepository.deleteAll(rents);
+    @Override
+    public void delete(final Rent rent){
+        rentRepository.delete(rent);
     }
 }

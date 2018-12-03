@@ -2,41 +2,41 @@ package com.rent.hertz.service;
 
 import com.rent.hertz.domain.TrafficTicket;
 import com.rent.hertz.repository.TrafficTicketRepository;
+import com.rent.hertz.service.interfaces.HertzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TrafficTicketService {
+public class TrafficTicketService implements HertzService<TrafficTicket> {
 
     @Autowired
-    private TrafficTicketRepository trafficTicketRepository;
+    private TrafficTicketRepository ticketRepository;
 
+    @Override
     public TrafficTicket save(final TrafficTicket trafficTicket){
-        return trafficTicketRepository.save(trafficTicket);
+        return ticketRepository.save(trafficTicket);
     }
 
-    public Optional<TrafficTicket> findById(final Long idTrafficTicket){
-        return trafficTicketRepository.findById(idTrafficTicket);
+    @Override
+    public TrafficTicket update(final TrafficTicket trafficTicket){
+        return ticketRepository.save(trafficTicket);
     }
 
-    public List<TrafficTicket> findAllById(final List<Long> idsTrafficTickets){
-        return trafficTicketRepository.findAllById(idsTrafficTickets);
+    @Override
+    public Optional<TrafficTicket> findById(final String idTicket){
+        return ticketRepository.findById(idTicket);
     }
 
-    public Page<TrafficTicket> findAll(final Pageable pageable){
-        return trafficTicketRepository.findAll(pageable);
+    @Override
+    public List<TrafficTicket> findAll(){
+        return ticketRepository.findAll();
     }
 
-    public void deleteById(final Long idTrafficTicket){
-        trafficTicketRepository.deleteById(idTrafficTicket);
-    }
-
-    public void deleteAllById(final List<TrafficTicket> idsTrafficTickets){
-        trafficTicketRepository.deleteAll(idsTrafficTickets);
+    @Override
+    public void delete(final TrafficTicket ticket){
+        ticketRepository.delete(ticket);
     }
 }

@@ -1,11 +1,9 @@
 package com.rent.hertz.resource;
 
-import com.rent.hertz.domain.Rent;
 import com.rent.hertz.domain.TrafficTicket;
+import com.rent.hertz.resource.interfaces.HertzResource;
 import com.rent.hertz.service.TrafficTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,45 +11,40 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/traffic-ticket")
-public class TrafficTicketResource {
+@RequestMapping("/tickets")
+public class TrafficTicketResource implements HertzResource<TrafficTicket> {
 
     @Autowired
-    private TrafficTicketService trafficTicketService;
+    private TrafficTicketService ticketService;
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public TrafficTicket save(@RequestBody final TrafficTicket trafficTicket) {
-        return trafficTicketService.save(trafficTicket);
+    @Override @RequestMapping(method = RequestMethod.POST)
+    public TrafficTicket save(@RequestBody final TrafficTicket ticket){
+        return ticketService.save(ticket);
     }
 
-    @RequestMapping(value="/{idTrafficTicket}/update", method = RequestMethod.PUT)
-    public TrafficTicket update(@PathVariable Long idTrafficTicket, @RequestBody final TrafficTicket trafficTicket) {
-        return trafficTicketService.save(trafficTicket);
+    @Override @RequestMapping(method = RequestMethod.PUT)
+    public TrafficTicket update(@RequestBody final TrafficTicket ticket){
+        return ticketService.save(ticket);
     }
 
-    @RequestMapping(value="/list-all", method = RequestMethod.GET)
-    public Page<TrafficTicket> findAll(final Pageable pageable) {
-        return  trafficTicketService.findAll(pageable);
+    @Override @RequestMapping(method = RequestMethod.GET)
+    public List<TrafficTicket> findAll(){
+        return  ticketService.findAll();
     }
 
-    @RequestMapping(value="/{idTrafficTicket}/find", method = RequestMethod.GET)
-    public Optional<TrafficTicket> findById(@PathVariable final Long idTrafficTicket) {
-        return trafficTicketService.findById(idTrafficTicket);
+    @Override @RequestMapping(value="/{idTicket}", method = RequestMethod.GET)
+    public Optional<TrafficTicket> findById(@PathVariable final String idTicket){
+        return ticketService.findById(idTicket);
     }
 
-    @RequestMapping(value="/{idsTrafficTicket}/find-all", method = RequestMethod.GET)
-    public List<TrafficTicket> findById(@PathVariable final List<Long> idsTrafficTicket){
-        return trafficTicketService.findAllById(idsTrafficTicket);
+    @Override @RequestMapping(value="/{idTicket}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable final String idTicket){
+        ticketService.findById(idTicket)
+                .ifPresent(this::accept);
     }
 
-    @RequestMapping(value="/{idTrafficTicket}/delete", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable final Long idTrafficTicket) {
-        trafficTicketService.deleteById(idTrafficTicket);
-    }
-
-    @RequestMapping(value="/delete-all", method = RequestMethod.DELETE)
-    public void deleteAllById(@RequestBody final List<TrafficTicket> trafficTickets) {
-        trafficTicketService.deleteAllById(trafficTickets);
+    private void accept(TrafficTicket ticket) {
+        ticketService.delete(ticket);
     }
 
 }

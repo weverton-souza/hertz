@@ -1,5 +1,7 @@
 package com.rent.hertz.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,20 +9,20 @@ import java.util.Objects;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     private String registration;
 
     private String name;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Employee setId(long id) {
+    public Employee setId(String id) {
         this.id = id;
         return this;
     }

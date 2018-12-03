@@ -2,45 +2,41 @@ package com.rent.hertz.service;
 
 import com.rent.hertz.domain.Vehicle;
 import com.rent.hertz.repository.VehicleRepository;
+import com.rent.hertz.service.interfaces.HertzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VehicleService {
+public class VehicleService implements HertzService<Vehicle> {
 
     @Autowired
     private VehicleRepository vehicleRepository;
 
+    @Override
     public Vehicle save(final Vehicle vehicle){
         return vehicleRepository.save(vehicle);
     }
 
-    public Optional<Vehicle> findById(final Long idVehicle){
+    @Override
+    public Vehicle update(final Vehicle vehicle){
+        return vehicleRepository.save(vehicle);
+    }
+
+    @Override
+    public Optional<Vehicle> findById(final String idVehicle){
         return vehicleRepository.findById(idVehicle);
     }
 
-    public List<Vehicle> findAllById(final List<Long> idsRents){
-        return vehicleRepository.findAllById(idsRents);
+    @Override
+    public List<Vehicle> findAll(){
+        return vehicleRepository.findAll();
     }
 
-    public Page<Vehicle> findAll(final Pageable pageable){
-        return vehicleRepository.findAll(pageable);
-    }
-
-    public void deleteById(final Long idCategory){
-        vehicleRepository.deleteById(idCategory);
-    }
-
-    public void deleteAllById(final List<Vehicle> vehicles){
-        vehicleRepository.deleteAll(vehicles);
-    }
-
-    public Page<Vehicle> findVehicleByCategory(final String idCategoria, final Pageable pageable){
-        return vehicleRepository.findVehicleByCategory(idCategoria, pageable);
+    @Override
+    public void delete(final Vehicle vehicle){
+        vehicleRepository.delete(vehicle);
     }
 }

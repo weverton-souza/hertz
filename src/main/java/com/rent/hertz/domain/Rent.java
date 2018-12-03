@@ -1,7 +1,8 @@
 package com.rent.hertz.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,9 +10,9 @@ import java.util.Objects;
 public class Rent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     private String date;
 
@@ -22,17 +23,17 @@ public class Rent {
     private Customer customer;
 
     @OneToMany
-    private List<Demage> demages;
+    private List<Damage> damages;
 
     @OneToMany
     private List<TrafficTicket> trafficTickets;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Rent setId(long id) {
+    public Rent setId(String id) {
         this.id = id;
         return this;
     }
@@ -64,12 +65,12 @@ public class Rent {
         return this;
     }
 
-    public List<Demage> getDemages() {
-        return demages;
+    public List<Damage> getDamages() {
+        return damages;
     }
 
-    public Rent setDemages(List<Demage> demages) {
-        this.demages = demages;
+    public Rent setDamages(List<Damage> damages) {
+        this.damages = damages;
         return this;
     }
 
@@ -102,7 +103,7 @@ public class Rent {
                 ", date=" + date +
                 ", vehicle=" + vehicle +
                 ", customer=" + customer +
-                ", demages=" + demages +
+                ", damages=" + damages +
                 ", trafficTickets=" + trafficTickets +
                 '}';
     }

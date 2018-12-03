@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
+public interface VehicleRepository extends JpaRepository<Vehicle, String> {
 
     @Query(value="select * from vehicle v where category_id = :idCategory", nativeQuery = true)
     Page<Vehicle> findVehicleByCategory(@Param("idCategory") String idCategory, Pageable pageable);
